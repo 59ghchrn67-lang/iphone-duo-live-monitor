@@ -146,6 +146,14 @@ async def monitor():
             print("Reconnecting in 5 seconds...", flush=True)
             await asyncio.sleep(5)
 
+if os.getenv("TEST_DISCORD") == "true":
+    send_discord(
+        "🧪 TEST — iPhone Duo GitHub bot\n"
+        "📱 256GB Night Sky\n"
+        "📍 Bristol — Cribbs Causeway\n"
+        "✅ Discord notification working!\n"
+        "⚠️ SIMULATED — NOT REAL STOCK"
+    )
 
 if __name__ == "__main__":
     print(
