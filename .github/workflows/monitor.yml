@@ -1,0 +1,36 @@
+
+name: iPhone Duo Live Stock Monitor
+
+on:
+  schedule:
+    # GitHub schedules use UTC.
+    # Start at 06:00, 11:00, 16:00 and 21:00 UK time in winter.
+    - cron: "0 6,11,16,21 * * *"
+
+  # Allows us to start the bot manually
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run live stock monitor
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: python -u monitor.py
