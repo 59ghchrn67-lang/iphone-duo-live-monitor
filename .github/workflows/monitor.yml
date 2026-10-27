@@ -3,9 +3,10 @@ name: iPhone Duo Live Stock Monitor
 
 on:
   schedule:
-    # GitHub schedules use UTC.
-    # Start at 06:00, 11:00, 16:00 and 21:00 UK time in winter.
-    - cron: "0 6,11,16,21 * * *"
+    - cron: "0 6 * * *"
+    - cron: "45 10 * * *"
+    - cron: "30 15 * * *"
+    - cron: "15 20 * * *"
 
   # Allows us to start the bot manually
   workflow_dispatch:
