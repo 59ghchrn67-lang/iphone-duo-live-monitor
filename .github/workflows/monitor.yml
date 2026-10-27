@@ -33,5 +33,5 @@ jobs:
       - name: Run live stock monitor
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          TEST_DISCORD: "true"
+          TEST_DISCORD: "false"
         run: python -u monitor.py
