@@ -149,10 +149,10 @@ async def monitor():
 
 if os.getenv("TEST_DISCORD") == "true":
     send_discord(
+        "<@706937183398789142>\n"
         "🧪 TEST — iPhone Duo GitHub bot\n"
         "📱 256GB Night Sky\n"
         "📍 Bristol — Cribbs Causeway\n"
-        "✅ Discord notification working!\n"
         "⚠️ SIMULATED — NOT REAL STOCK"
     )
 
