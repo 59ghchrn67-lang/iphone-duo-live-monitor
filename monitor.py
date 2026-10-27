@@ -114,6 +114,7 @@ async def monitor():
                             )
 
                             notification = (
+                                "<@706937183398789142>\n"
                                 "🚨 **IPHONE DUO IN STOCK!** 🚨\n\n"
                                 f"📱 **{PRODUCTS[part]}**\n"
                                 f"📍 **{TARGET_STORES[store]}**\n\n"
