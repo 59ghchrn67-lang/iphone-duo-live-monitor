@@ -52,6 +52,22 @@ def send_discord(message):
             flush=True
         )
 
+def session_notification(status):
+    now = datetime.now(timezone.utc).strftime("%d %b %Y, %H:%M UTC")
+
+    if status == "started":
+        send_discord(
+            "🟢 **iPhone Duo — Monitoring Started**\n"
+            f"🕒 {now}\n"
+            "📍 Bristol, Bath & Cardiff\n"
+            "📱 256GB Night Sky / Star White"
+        )
+    else:
+        send_discord(
+            "🔴 **iPhone Duo — Monitoring Ended**\n"
+            f"🕒 {now}\n"
+            "📍 Bristol, Bath & Cardiff"
+        )
 
 async def monitor():
     while True:
@@ -171,4 +187,11 @@ if __name__ == "__main__":
     for product in PRODUCTS.values():
         print(f"  - {product}")
 
-    asyncio.run(monitor())
+    try:
+        session_notification("started")
+        asyncio.run(monitor())
+    finally:
+        try:
+            session_notification("ended")
+        except Exception as error:
+            print(f"Failed to send ending notification: {error}", flush=True)
