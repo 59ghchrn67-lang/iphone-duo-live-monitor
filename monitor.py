@@ -4,6 +4,7 @@ import json
 import os
 import urllib.parse
 import urllib.request
+import time
 from datetime import datetime, timezone
 
 import websockets
@@ -70,6 +71,19 @@ def session_notification(status):
         )
 
 async def monitor():
+    end_time = time.monotonic() + (5 * 60 * 60)
+
+    async def stop_after_session():
+        await asyncio.sleep(max(0, end_time - time.monotonic()))
+        raise asyncio.CancelledError
+
+    main_task = asyncio.current_task()
+
+    async def timer():
+        await asyncio.sleep(5 * 60 * 60)
+        main_task.cancel()
+
+    asyncio.create_task(timer())
     while True:
         try:
             print("Connecting to InStock Radar...", flush=True)
